@@ -1,0 +1,357 @@
+;
+; !!!!!!! - NOTE! BUILT FOR NULLSOFT INSTALL SYSTEM v2.01 (2004)
+; https://nsis.sourceforge.io/Docs/AppendixF.html#v2.01
+;
+; BEGIN------------------------------------------------------
+;
+; !conMania Collection 8.0 (Codename Octavius)
+;
+; http://www.steveprutz.com
+;
+; by Steve Prutzman
+;
+; 10:12 PM 7/16/2004
+;
+
+Name "!conMania Collection 8"
+
+Icon "${NSISDIR}\Contrib\Graphics\Icons\eighty.ico"
+
+OutFile "C:\collection8.exe"
+
+SetDateSave on
+
+SetDatablockOptimize on
+
+CRCCheck on
+
+InstallDir "C:\!conMania Collection"
+
+InstProgressFlags smooth
+
+ShowInstDetails hide
+
+SilentInstall normal
+
+AutoCloseWindow true
+
+LicenseData "C:\8welcome.txt"
+
+LicenseForceSelection checkbox
+
+XPStyle on
+
+;--------------------------------
+
+Page license
+Page directory
+Page instfiles
+
+UninstPage uninstConfirm
+UninstPage instfiles
+
+;--------------------------------
+
+Section "License"
+
+SectionEnd
+
+;--------------------------------
+
+Section "" ; No components page, name is not important
+
+  ; Set output path to the installation directory.
+
+  SectionIn RO
+
+  SetOutPath "$INSTDIR"
+  File /a "C:\!conMania Collection\*.*"
+
+  SetOutPath "$INSTDIR\!cons"
+  File "C:\!conMania Collection\!cons\*.*"
+
+  SetOutPath "$INSTDIR\Buildings & Structures"
+  File "C:\!conMania Collection\Buildings & Structures\*.*"
+
+  SetOutPath "$INSTDIR\Cartoons & Animated"
+  File "C:\!conMania Collection\Cartoons & Animated\*.*"
+
+  SetOutPath "$INSTDIR\Cartoons & Animated\Comics"
+  File "C:\!conMania Collection\Cartoons & Animated\Comics\*.*"
+
+  SetOutPath "$INSTDIR\Companies & Services"
+  File "C:\!conMania Collection\Companies & Services\*.*"
+
+  SetOutPath "$INSTDIR\Computers"
+  File "C:\!conMania Collection\Computers\*.*"
+
+  SetOutPath "$INSTDIR\Computers\Disks"
+  File "C:\!conMania Collection\Computers\Disks\*.*"
+
+  SetOutPath "$INSTDIR\Computers\Software"
+  File "C:\!conMania Collection\!cons\*.*"
+
+  SetOutPath "$INSTDIR\Food"
+  File "C:\!conMania Collection\Food\*.*"
+
+  SetOutPath "$INSTDIR\Food\Brand Names"
+  File "C:\!conMania Collection\Food\Brand Names\*.*"
+
+  SetOutPath "$INSTDIR\Gaming"
+  File "C:\!conMania Collection\Gaming\*.*"
+
+  SetOutPath "$INSTDIR\Gaming\Computer Games"
+  File "C:\!conMania Collection\Gaming\Computer Games\*.*"
+
+  SetOutPath "$INSTDIR\Gaming\Console Gaming"
+  File "C:\!conMania Collection\Gaming\Console Gaming\*.*"
+
+  SetOutPath "$INSTDIR\Media"
+  File "C:\!conMania Collection\Media\*.*"
+
+  SetOutPath "$INSTDIR\Media\Music"
+  File "C:\!conMania Collection\Media\Music\*.*"
+
+  SetOutPath "$INSTDIR\Media\Music\Artists & Bands"
+  File "C:\!conMania Collection\Media\Music\Artists & Bands\*.*"
+
+  SetOutPath "$INSTDIR\Nations & Politics"
+  File "C:\!conMania Collection\Nations & Politics\*.*"
+
+  SetOutPath "$INSTDIR\Office"
+  File "C:\!conMania Collection\Office\*.*"
+
+  SetOutPath "$INSTDIR\Organisms"
+  File "C:\!conMania Collection\Organisms\*.*"
+
+  SetOutPath "$INSTDIR\Science"
+  File "C:\!conMania Collection\Science\*.*"
+
+  SetOutPath "$INSTDIR\Science\Health"
+  File "C:\!conMania Collection\Science\Health\*.*"
+
+  SetOutPath "$INSTDIR\Seasons & Holidays"
+  File "C:\!conMania Collection\Seasons & Holidays\*.*"
+
+  SetOutPath "$INSTDIR\Space"
+  File "C:\!conMania Collection\Space\*.*"
+
+  SetOutPath "$INSTDIR\Spirituality & Philosophy"
+  File "C:\!conMania Collection\Spirituality & Philosophy\*.*"
+
+  SetOutPath "$INSTDIR\Sports & Recreation"
+  File "C:\!conMania Collection\Sports & Recreation\*.*"
+
+  SetOutPath "$INSTDIR\Sports & Recreation\Teams"
+  File "C:\!conMania Collection\Sports & Recreation\Teams\*.*"
+
+  SetOutPath "$INSTDIR\Sports & Recreation\Teams\MLB"
+  File "C:\!conMania Collection\Sports & Recreation\Teams\MLB\*.*"
+
+  SetOutPath "$INSTDIR\Sports & Recreation\Teams\NFL"
+  File "C:\!conMania Collection\Sports & Recreation\Teams\NFL\*.*"
+
+  SetOutPath "$INSTDIR\Sports & Recreation\Teams\NHL"
+  File "C:\!conMania Collection\Sports & Recreation\Teams\NHL\*.*"
+
+  SetOutPath "$INSTDIR\Transportation"
+  File "C:\!conMania Collection\Transportation\*.*"
+
+  SetOutPath "$INSTDIR\Warfare"
+  File "C:\!conMania Collection\Warfare\*.*"
+
+  WriteINIStr "$INSTDIR\Add New Icons.url" "InternetShortcut" "URL" "http://iconmania.8m.com/submiticons.html"
+
+  WriteUninstaller "uninstall.exe"
+
+SectionEnd
+
+;******************
+;Shortcuts
+;from makensis.nsi
+;*******************
+
+!ifndef NO_STARTMENUSHORTCUTS
+Section "Start Menu and Desktop Shortcuts" SecShortcuts
+
+  SetDetailsPrint textonly
+  DetailPrint "Installing Start Menu and Desktop Shortcuts..."
+  SetDetailsPrint listonly
+
+!else
+Section "Desktop Shortcut" SecShortcuts
+
+  SetDetailsPrint textonly
+  DetailPrint "Installing Desktop Shortcut..."
+  SetDetailsPrint listonly
+
+!endif
+  SectionIn 1 2 3
+  SetOutPath $INSTDIR
+
+!ifndef NO_STARTMENUSHORTCUTS
+  CreateDirectory "$SMPROGRAMS\!conMania Collection\"
+
+  CreateShortCut "$SMPROGRAMS\!conMania Collection\Collection 8.0.lnk" "$INSTDIR" parameters "$INSTDIR\!cons\Eight 01.ico"
+
+  CreateShortCut "$SMPROGRAMS\!conMania Collection\Read Me.lnk" "$INSTDIR\readme.txt"
+
+  CreateShortCut "$SMPROGRAMS\!conMania Collection\Help (local).lnk" "$INSTDIR\faq.html"
+
+  WriteINIStr "$SMPROGRAMS\!conMania Collection\Website (external).url" "InternetShortcut" "URL" "http://www.steveprutz.com/icon"
+
+  CreateShortCut "$SMPROGRAMS\!conMania Collection\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+
+!endif
+
+  CreateShortCut "$DESKTOP\!conMania Collection.lnk" "$INSTDIR" parameters "$INSTDIR\!cons\Cube 01.ico"
+
+;**********
+;MessageBox
+;**********
+
+MessageBox MB_OK|MB_TOPMOST "Installation complete! Double-click the shortcut on the Desktop."
+
+SectionEnd
+
+;*********************
+;Win Ver Info
+;from versioninfo.nsi
+;*********************
+
+LoadLanguageFile "${NSISDIR}\Contrib\Language Files\English.nlf"
+;--------------------------------
+;Version Information
+
+  VIProductVersion "8.0.0.0"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "!conMania Collection"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "The most organized assortment of icons available"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "!conMania (StevePrutz)"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "8.0"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" "Created by Steve Prutzman"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright © 2004"
+  VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "Windows icon collection"
+
+Section ""
+
+SectionEnd
+
+;--------------------------------
+; Uninstaller
+
+UninstallIcon "${NSISDIR}\Contrib\Graphics\Icons\cubeu.ico"
+
+UninstallText "To uninstall !conMania Collection 8.0, click Next."
+
+ShowUninstDetails show
+
+Section "Uninstall"
+
+  Delete "$INSTDIR\!cons\*.*"
+  RMDir "$INSTDIR\!cons"
+
+  Delete "$INSTDIR\Buildings & Structures\*.*"
+  RMDir "$INSTDIR\Buildings & Structures"
+
+  Delete "$INSTDIR\Cartoons & Animated\Comics\*.*"
+  RMDir "$INSTDIR\Cartoons & Animated\Comics"
+
+  Delete "$INSTDIR\Cartoons & Animated\*.*"
+  RMDir "$INSTDIR\Cartoons & Animated"
+
+  Delete "$INSTDIR\Companies & Services\*.*"
+  RMDir "$INSTDIR\Companies & Services"
+
+  Delete "$INSTDIR\Computers\Disks\*.*"
+  RMDir "$INSTDIR\Computers\Disks"
+
+  Delete "$INSTDIR\Computers\Software\*.*"
+  RMDir "$INSTDIR\Computers\Software\"
+
+  Delete "$INSTDIR\Computers\*.*"
+  RMDir "$INSTDIR\Computers"
+
+  Delete "$INSTDIR\Food\Brand Names\*.*"
+  RMDir "$INSTDIR\Food\Brand Names"
+
+  Delete "$INSTDIR\Food\*.*"
+  RMDir "$INSTDIR\Food"
+
+  Delete "$INSTDIR\Gaming\Console Gaming\*.*"
+  RMDir "$INSTDIR\Gaming\Console Gaming"
+
+  Delete "$INSTDIR\Gaming\Computer Games\*.*"
+  RMDir "$INSTDIR\Gaming\Computer Games"
+
+  Delete "$INSTDIR\Gaming\*.*"
+  RMDir "$INSTDIR\Gaming"
+
+  Delete "$INSTDIR\Media\Music\Artists & Bands\*.*"
+  RMDir "$INSTDIR\Media\Music\Artists & Bands"
+
+  Delete "$INSTDIR\Media\Music\*.*"
+  RMDir "$INSTDIR\Media\Music"
+
+  Delete "$INSTDIR\Media\*.*"
+  RMDir "$INSTDIR\Media"
+
+  Delete "$INSTDIR\Nations & Politics\*.*"
+  RMDir "$INSTDIR\Nations & Politics"
+
+  Delete "$INSTDIR\Office\*.*"
+  RMDir "$INSTDIR\Office"
+
+  Delete "$INSTDIR\Organisms\*.*"
+  RMDir "$INSTDIR\Organisms"
+
+  Delete "$INSTDIR\Science\Health\*.*"
+  RMDir "$INSTDIR\Science\Health"
+
+  Delete "$INSTDIR\Science\*.*"
+  RMDir "$INSTDIR\Science"
+
+  Delete "$INSTDIR\Seasons & Holidays\*.*"
+  RMDir "$INSTDIR\Seasons & Holidays"
+
+  Delete "$INSTDIR\Space\*.*"
+  RMDir "$INSTDIR\Space"
+
+  Delete "$INSTDIR\Spirituality & Philosophy\*.*"
+  RMDir "$INSTDIR\Spirituality & Philosophy"
+
+  Delete "$INSTDIR\Sports & Recreation\Teams\NHL\*.*"
+  RMDir "$INSTDIR\Sports & Recreation\Teams\NHL\"
+
+  Delete "$INSTDIR\Sports & Recreation\Teams\NFL\*.*"
+  RMDir "$INSTDIR\Sports & Recreation\Teams\NFL"
+
+  Delete "$INSTDIR\Sports & Recreation\Teams\MLB\*.*"
+  RMDir "$INSTDIR\Sports & Recreation\Teams\MLB"
+
+  Delete "$INSTDIR\Sports & Recreation\Teams\*.*"
+  RMDir "$INSTDIR\Sports & Recreation\Teams"
+
+  Delete "$INSTDIR\Sports & Recreation\*.*"
+  RMDir "$INSTDIR\Sports & Recreation"
+
+  Delete "$INSTDIR\Transportation\*.*"
+  RMDir "$INSTDIR\Transportation"
+
+  Delete "$INSTDIR\Warfare\*.*"
+  RMDir "$INSTDIR\Warfare"
+
+;---
+
+  Delete "$INSTDIR\*.*"
+  RMDir "$INSTDIR"
+
+  Delete "$SMPROGRAMS\!conMania Collection\*.*"
+  RMDir "$SMPROGRAMS\!conMania Collection"
+
+  Delete "$DESKTOP\!conMania Collection.lnk"
+
+  IfFileExists "$INSTDIR" 0 NoErrorMsg
+    MessageBox MB_OK "Note: $INSTDIR could not be removed. DON'T PANIC! Just delete it manually." IDOK 0
+  NoErrorMsg:
+
+SectionEnd
